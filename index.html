@@ -3,160 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shin AI Assistant</title>
+    <title>Community Help & Q&A</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .chat-container {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .chat-header {
-            background-color: #10a37f;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .chat-messages {
-            height: 350px;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .message {
-            padding: 10px 14px;
-            border-radius: 8px;
-            max-width: 80%;
-            font-size: 14px;
-            line-height: 1.4;
-            word-wrap: break-word;
-        }
-        .user-message {
-            background-color: #e3f2fd;
-            align-self: flex-end;
-            color: #0d47a1;
-        }
-        .ai-message {
-            background-color: #f1f1f1;
-            align-self: flex-start;
+            background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            text-align: center;
         }
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-            background: #fff;
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
         }
-        .chat-input-area input {
-            flex: 1;
+        h1 {
+            color: #ff5722;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            text-align: center;
+            color: #666;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            outline: none;
-            font-size: 14px;
+            box-sizing: border-box;
         }
-        .chat-input-area button {
-            background-color: #10a37f;
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .btn {
+            background-color: #4CAF50;
             color: white;
+            padding: 12px 20px;
             border: none;
-            padding: 10px 15px;
-            margin-left: 5px;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            font-size: 16px;
             font-weight: bold;
         }
-        .chat-input-area button:hover {
-            background-color: #0e8c6d;
+        .btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
 
-    <div class="chat-container">
-        <div class="chat-header">Shin AI Assistant</div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message ai-message">Hello! How can I assist you today?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="Type your message here..." onkeypress="handleKeyPress(event)" />
-            <button onclick="sendMessage()">Send</button>
-        </div>
+    <div class="container">
+        <h1>Help Platform</h1>
+        <p>Do you have a question or something to share? Leave a message below so we can help.</p>
+        
+        <!-- You can replace the action link with your Formspree ID -->
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Question or Message:</label>
+                <textarea id="message" name="message" required placeholder="What would you like to ask or convey?"></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Send Message</button>
+        </form>
     </div>
-
-    <script>
-        const API_KEY = "AQ.Ab8RN6LzfCyg8vea6reeVuCXq7SoMlX_PXhE6R9ssFdUH24IAw";
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        }
-
-        async function sendMessage() {
-            const inputField = document.getElementById("userInput");
-            const messageText = inputField.value.trim();
-            const chatMessages = document.getElementById("chatMessages");
-
-            if (messageText === "") return;
-
-            const userDiv = document.createElement("div");
-            userDiv.className = "message user-message";
-            userDiv.textContent = messageText;
-            chatMessages.appendChild(userDiv);
-
-            inputField.value = "";
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            const aiDiv = document.createElement("div");
-            aiDiv.className = "message ai-message";
-            aiDiv.textContent = "Thinking...";
-            chatMessages.appendChild(aiDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{ text: messageText }]
-                        }]
-                    })
-                });
-
-                const data = await response.json();
-                
-                if (data.candidates && data.candidates[0].content.parts[0].text) {
-                    aiDiv.textContent = data.candidates[0].content.parts[0].text;
-                } else {
-                    aiDiv.textContent = "Sorry, I encountered an issue retrieving a response.";
-                }
-            } catch (error) {
-                aiDiv.textContent = "Connection error. Please check your network connection.";
-            }
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    </script>
 
 </body>
 </html>
