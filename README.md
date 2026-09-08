@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Facebook</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 980px;
+            padding: 20px;
+        }
+        .left-side {
+            width: 500px;
+            padding-right: 32px;
+        }
+        .left-side h1 {
+            color: #1877f2;
+            font-size: 56px;
+            margin-bottom: 0;
+        }
+        .left-side p {
+            font-size: 28px;
+            line-height: 32px;
+            color: #1c1e21;
+            margin-top: 10px;
+        }
+        .right-side {
+            width: 396px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .right-side input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            box-sizing: border-box;
+        }
+        .right-side input:focus {
+            border-color: #1877f2;
+            outline: none;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+        .login-btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .login-btn:hover {
+            background-color: #166fe5;
+        }
+        .forgot-pass {
+            display: block;
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .forgot-pass:hover {
+            text-decoration: underline;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #dadde1;
+            margin-bottom: 20px;
+        }
+        .create-btn {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .create-btn:hover {
+            background-color: #36a420;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-side">
+            <h1>facebook</h1>
+            <p>Connect with friends and the world around you on Facebook.</p>
+        </div>
+        
+        <div class="right-side">
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="email" placeholder="Email or phone number" required>
+                <input type="password" id="login_password" placeholder="Password" required>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+            
+            <a href="#" class="forgot-pass">Forgot password?</a>
+            <hr>
+            <button class="create-btn">Create new account</button>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            alert("Nag-log in ka gamit ang: " + email);
+        }
+    </script>
+
+</body>
+</html>
